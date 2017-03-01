@@ -1,0 +1,218 @@
+﻿@model FirstMVC.Models.Customer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <div class="row">
+        <div class="col s12">
+            <div id="member" class="card">
+                <div class="card-content">
+                    <span class="card-title indigo-text">Borrower Information</span>
+                    <form>
+                        <div class="row">
+                            <div class="input-field col s12 m4">
+                                @Html.TextBoxFor(model => model.CustomerName, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Customer Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m4">
+                                @Html.TextBoxFor(model => model.CCSocialNum, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Last 4 of SSN</label>
+                            </div>
+                            <div class="input-field col s12 m4">
+                                @Html.TextBoxFor(model => model.DrivingLic, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">DL</label>
+                            </div>
+                            <div class="input-field col s12 m4">
+                                @Html.TextBoxFor(model => model.DOB, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">DOB</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.FirstName, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">First Name</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.LastName, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                @Html.TextBoxFor(model => model.Address, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Address</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.Phone, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Phone</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.Email, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Email</label>
+                            </div>
+                        </div>
+                        <span class="card-title indigo-text">Co-borrower</span>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.CoBorrowerName, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Name</label>
+                            </div>
+                            @*<div class="input-field col s12 m6">
+                                    @Html.TextBoxFor(model => model.CCSocialNum, new Dictionary<string, object>() { { "readonly", "true" } })
+                                    <label class="active" for="co_LasttName">Last Name</label>
+                                </div>*@
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="loan" class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title indigo-text">Pre-approval Details</span>
+                    <form>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @*@Html.TextBoxFor(model => model.CoBorrowerName, new Dictionary<string, object>() { { "readonly", "true" } })*@
+                                <input value="201701001" id="preapp_id" type="text" class="readonly">
+                                <label class="active">Pre-approval ID</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.ApprovalAmt, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Amount</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.Rate, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Rate (APR)</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.Term, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Term (months)</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.LTV, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Maximum LTV</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col s12">
+            <div id="vehicle" class="card">
+                <div class="card-content">
+                    <span class="card-title indigo-text">Trade-in Information</span>
+                    <form>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                @Html.TextBox("CUName1", (string)ViewBag.CUName, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Lien Holder</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m4">
+                                @Html.TextBoxFor(model => model.VinNum, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">VIN</label>
+                            </div>
+                            <div class="input-field col s12 m4">
+                                @Html.TextBoxFor(model => model.Mileage, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Mileage</label>
+                            </div>
+                            <div class="input-field col s12 m4">
+                                @Html.TextBoxFor(model => model.Year, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Year</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.Make, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Make</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.Model, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Model</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.PayOff, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Payoff</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.PreApprovExpirationDate, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Payoff Expiration</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.TextBoxFor(model => model.PerDiem, new Dictionary<string, object>() { { "readonly", "true" } })
+                                <label class="active">Per Diem</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Visible to Dealer, Admin only -->
+        <div class="col s12">
+            <div id="cu" class="card">
+                <div class="card-content">
+                    <span class="card-title indigo-text">Credit Union Information</span>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            @Html.TextBox("CUName1", (string)ViewBag.CUName, new Dictionary<string, object>() { { "readonly", "true" } })
+                            <label class="active">Credit Union Name</label>
+                        </div>
+                        <div class="input-field col s12">
+                            @Html.TextBox("address", (string)ViewBag.address, new Dictionary<string, object>() { { "readonly", "true" } })
+                            <label class="active">Address</label>
+                        </div>
+                        <div class="input-field col m6 s6">
+                            @Html.TextBox("phone", (string)ViewBag.phone, new Dictionary<string, object>() { { "readonly", "true" } })
+                            <label class="active">Phone Number</label>
+                        </div>
+                        <div class="input-field col m6 s6">
+                            @Html.TextBox("fax", (string)ViewBag.fax, new Dictionary<string, object>() { { "readonly", "true" } })
+                            <label class="active">FAX Number</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Visible to Dealer, Admin only -->
+    </div>
+
+
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

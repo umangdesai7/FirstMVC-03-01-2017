@@ -1,0 +1,104 @@
+﻿@model FirstMVC.Models.LoanInfo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LoanInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CUId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CUName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUName)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LTV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LTV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Term)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Term)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApprovalAmt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApprovalAmt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PreApprovExpirationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PreApprovExpirationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoanDoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoanDoc)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

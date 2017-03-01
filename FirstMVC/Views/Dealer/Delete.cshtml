@@ -1,0 +1,60 @@
+﻿@model FirstMVC.Models.Dealer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title indigo-text">Dealer Information</span>
+            <div class="row">
+                <div class="input-field col s12">
+                    @Html.TextBoxFor(model => model.DealerName, new Dictionary<string, object>() { { "readonly", "true" } })
+                    <label for="DealerName">Dealer Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    @Html.TextBoxFor(model => model.DealerInfo, new Dictionary<string, object>() { { "readonly", "true" } })
+                    <label for="DealerInfo">Dealer Info</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    @Html.TextBoxFor(model => model.Address, new Dictionary<string, object>() { { "readonly", "true" } })
+                    <label for="Address">Address</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    @Html.TextBoxFor(model => model.Phone, new Dictionary<string, object>() { { "readonly", "true" } })
+                    <label for="Phone">Phone</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    @Html.TextBoxFor(model => model.Fax, new Dictionary<string, object>() { { "readonly", "true" } })
+                    <label for="Fax">Fax</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    @Html.TextBoxFor(model => model.Email, new Dictionary<string, object>() { { "readonly", "true" } })
+                    <label for="Email">Email</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

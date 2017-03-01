@@ -1,0 +1,120 @@
+﻿@model FirstMVC.Models.VehicleInfo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>VehicleInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CUId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CUName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUName)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Make)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Make)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VinNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VinNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mileage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mileage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayOff)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayOff)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PerDiem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerDiem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayOffExpirationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayOffExpirationDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,84 @@
+﻿@model PagedList.IPagedList<FirstMVC.Models.CreditUnion>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.NameSortParm = "CUName";
+}
+
+<h1 class="center indigo-text">Credit Uinions</h1>
+
+@if ((int)Session["USerRole"] == 0)
+{
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+        <a class="waves-effect waves-light green btn" href="@Url.Action("Create")"><i class="material-icons left">add</i>Add new Credit Union</a>
+    </p>
+}
+
+@using (Html.BeginForm("Index", "CreditUnion", FormMethod.Get))
+{
+    <p>
+        <div class="row">
+            <div class="input-field col s12">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { size = "100" })
+                @Html.Label("Search by Credit Union Name")
+            </div>
+        </div>
+        <input type="submit" value="Search" style="position: absolute; left: -9999px" />
+    </p>
+}
+
+<table class="responsive-table striped">
+    <thead>
+    <tr>
+        <th>
+            Credit Union Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Fax
+        </th>
+        <th>
+            Email
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CUName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            @*<td>
+                    @Html.ActionLink("View", "Details", new { id = item.id })
+                </td>*@
+            <td class="center"><a class="waves-effect waves-teal btn-flat" href="@Url.Action("Details", new { id = item.id })"><i class="large material-icons">remove_red_eye</i></a></td>
+        </tr>
+    }
+    </tbody>
+</table>
+<div class="center indigo-text">
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

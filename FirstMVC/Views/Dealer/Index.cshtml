@@ -1,0 +1,113 @@
+﻿@*@model IEnumerable<FirstMVC.Models.Dealer>*@
+@model PagedList.IPagedList<FirstMVC.Models.Dealer>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.NameSortParm = "DealerName";
+}
+
+<h1 class="center indigo-text">Dealers</h1>
+
+@if ((int)Session["UserRole"] == 0)
+{
+    <p>
+        @*@Html.ActionLink("Add new Dealer", "Create")*@
+        <a class="waves-effect waves-light green btn" href="@Url.Action("Create")"><i class="material-icons left">add</i>Add new Dealer</a>
+    </p>
+}
+
+@using (Html.BeginForm("Index", "Dealer", FormMethod.Get))
+{
+    <p>
+        <div class="row">
+            <div class="input-field col s12">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { size = "100" })
+                @Html.Label("Search by Dealer Name")
+            </div>
+        </div>
+        <input type="submit" value="Search" style="position: absolute; left: -9999px"/>
+    </p>
+}
+
+<table class="responsive-table striped">
+    <thead>
+        <tr>
+            @*<th onshow="true">
+                    @Html.DisplayNameFor(model => model.CUId)
+                </th>*@
+            @*<th>
+                Credit Union
+            </th>*@
+            <th>
+                Dealer Name
+                @*@Html.ActionLink("Dealer Name", "Index", new { sortOrder = ViewBag.NameSortParm })*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.DealerInfo)*@
+                Dealer Information
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Address)*@
+                Address
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Phone)*@
+                Phone
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Fax)*@
+                Fax
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Email)*@
+                Email
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CUId)
+                    </td>*@
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.CUName)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.DealerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DealerInfo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fax)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                @*<td>
+                    @Html.ActionLink("View", "Details", new { id = item.id })
+                </td>*@
+                <td class="center"><a class="waves-effect waves-teal btn-flat" href="@Url.Action("Details", new { id = item.id })"><i class="large material-icons">remove_red_eye</i></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+@*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
+<div class="center indigo-text">
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

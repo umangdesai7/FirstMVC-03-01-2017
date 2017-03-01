@@ -1,0 +1,95 @@
+﻿@model IEnumerable<FirstMVC.Models.Customer>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    @if (Request.IsAuthenticated & Session.Count > 0)
+    {
+        if ((int) Session["UserRole"] == 2)
+        {
+            using (Html.BeginForm("Details", "Customer", FormMethod.Get))
+            {
+                    <h1 class="center indigo-text">Search for a Pre-approval</h1>
+                <div class="row">
+                    @*<form class="col s12 m8 push-m2">*@
+                        <div class="row">
+                            <div class="input-field col m4 push-m1">
+                                <i class="material-icons prefix">search</i>
+                                @Html.TextBox("SearchSSNum", ViewBag.CurrentFilter as string, new { @type = "number", @min = "4" })
+                                <label>Last 4 of SSN</label>
+                            </div>
+                            <div class="input-field col m6 push-m1">
+                                @Html.TextBox("SearchLastName", ViewBag.CurrentFilter as string)
+                                <label>Last Name</label>
+                            </div>
+                        </div>
+                    @*</form>*@
+                </div>
+                <div class="row center">
+                    <button type="submit" class="center waves-effect waves-light btn-large blue darken-3"><i class="material-icons prefix left">search</i>Search</button>
+                </div>
+
+                <br><br><br>
+            }
+        }
+        else if ((int)Session["UserRole"] == 1)
+        {
+            Response.Redirect(@Url.Action("Index", "Customer"));
+        }
+        else if ((int)Session["UserRole"] == 0)
+        {
+            Response.Redirect(@Url.Action("Index","Customer"));
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("LoginUser", "User", FormMethod.Get))
+        {
+            @Html.ValidationSummary(true, "Login failed. Check your login details.");
+
+            <p>
+                @*<div>User Name: @Html.TextBox("UserName", ViewBag.CurrentFilter as string)</div>
+                <div>Password: @Html.TextBox("Password", ViewBag.CurrentFilter as string)</div>
+                <div><input type="submit" value="Login" /></div>*@
+                
+                <!-- InstanceBeginEditable name="Body" -->
+                <div class="row">
+                    <div class="col s12 m6 push-m3">
+                        <div class="card hoverable">
+                            <div class="card-content">
+                                <span class="card-title indigo-text">Please Log in:</span>
+                                <div class="row">
+                                    <form class="col s12">
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                @Html.TextBox("UserName", ViewBag.CurrentFilter as string)
+                                                @Html.Label("UserName")
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                @Html.Password("Password", ViewBag.CurrentFilter as string)
+                                                @Html.Label("Password")
+                                            </div>
+                                        </div>
+                                        <div><input type="submit" value="Login" class="btn green waves-effect waves-light"/></div>
+                                        @*<button class="btn green waves-effect waves-light" type="submit" name="action">Log in</button>*@
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-action">
+                                <a class="blue-grey-text text-lighten-2" href="#">I forgot my password.</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- InstanceEndEditable -->
+            </p>
+        }
+    }
+            </div>
+
+            
+
+            

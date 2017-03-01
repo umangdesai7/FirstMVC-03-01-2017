@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<!-- InstanceBegin template="/Templates/public-template.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <!-- InstanceBeginEditable name="PageTitle" -->
+    <title>Log In - cupreapprovals.org</title>
+    <!-- InstanceEndEditable -->
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/Content/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/Content/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <!-- InstanceBeginEditable name="CustomHeader" -->
+    <!-- Page-specific header content goes here. -->
+    <!-- InstanceEndEditable -->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/materialize.js"></script>
+    <script src="~/Scripts/init.js"></script>
+</head>
+<body>
+    @using Microsoft.AspNet.Identity
+    <nav class="indigo darken-4" role="navigation">
+        <div class="nav-wrapper container">
+            
+            @*<a id="logo-container" href="#" class="brand-logo">CU Pre-approvals</a>*@
+            <div class="navbar-header"><a id="logo-container" href="https://www.cupreapprovals.com" class="brand-logo"><img src="~/img/cu-pre-approvals.png" max-width="100%" height="68"></a>@*@Html.ActionLink("CU Pre-approvals", "Index", "Home", new { area = "" }, new { @class = "brand-logo" })*@
+            </div>
+            <div >
+                
+                @if (Request.IsAuthenticated & Session.Count > 0)
+                {
+                    //using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    //using (Html.BeginForm("Logout", "User", new { @class = "navbar-right" }))
+                    //{
+                        @*@Html.AntiForgeryToken()*@
+
+                        <ul class="right hide-on-med-and-down">
+                            <!-- InstanceBeginEditable name="FullNav" -->
+                            <li>@Html.Label("Hello " + User.Identity.GetUserName() + "!", new { @class = "grey-text text-lighten-6" })</li>
+                            <!-- InstanceEndEditable -->
+                            @if ((int)Session["UserRole"] == 0)
+                            {
+                                <li>@Html.ActionLink("Members", "Index", "Customer")</li>
+                                <li>@Html.ActionLink("Dealer", "Index", "Dealer")</li>
+                                <li>@Html.ActionLink("Credit Union", "Index", "CreditUnion")</li>
+                                <li>@Html.ActionLink("User", "Index", "User")</li>
+                                @*<li>@Html.ActionLink("Vehicle", "Index", "VehicleInfo")</li>
+                                <li>@Html.ActionLink("Loan Info", "Index", "LoanInfo")</li>*@
+                            }
+                            else if ((int)Session["UserRole"] == 1)
+                            {
+                                <li>@Html.ActionLink("Members", "Index", "Customer")</li>
+                                <li>@Html.ActionLink("Dealer", "Index", "Dealer")</li>
+                                @*<li>@Html.ActionLink("Vehicle", "Index", "VehicleInfo")</li>
+                                <li>@Html.ActionLink("Loan Info", "Index", "LoanInfo")</li>*@
+                            }
+                            else if ((int)Session["UserRole"] == 2)
+                            {
+                                @*<li>@Html.ActionLink("Credit Union", "Index", "CreditUnion")</li>
+                                  <li>@Html.ActionLink("Customer", "Index", "Customer")</li>
+                                  <li>@Html.ActionLink("Loan Info", "Index", "LoanInfo")</li>*@
+                            }
+                            @*<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>*@
+                            <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+                        </ul>
+                        <ul id="nav-mobile" class="side-nav">
+                            <!-- InstanceBeginEditable name="MobileNav" -->
+                            <li>@Html.Label("Hello " + User.Identity.GetUserName() + "!", new { @class = "grey-text text-lighten-6" })</li>
+                            <!-- InstanceEndEditable -->
+                            @if ((int)Session["UserRole"] == 0)
+                            {
+                                <li>@Html.ActionLink("Credit Union", "Index", "CreditUnion")</li>
+                                <li>@Html.ActionLink("Dealer", "Index", "Dealer")</li>
+                                <li>@Html.ActionLink("Customer", "Index", "Customer")</li>
+                                <li>@Html.ActionLink("User", "Index", "User")</li>
+                                @*<li>@Html.ActionLink("Vehicle", "Index", "VehicleInfo")</li>
+                                <li>@Html.ActionLink("Loan Info", "Index", "LoanInfo")</li>*@
+                            }
+                            else if ((int)Session["UserRole"] == 1)
+                            {
+                                <li>@Html.ActionLink("Dealer", "Index", "Dealer")</li>
+                                <li>@Html.ActionLink("Customer", "Index", "Customer")</li>
+                                @*<li>@Html.ActionLink("Vehicle", "Index", "VehicleInfo")</li>
+                                <li>@Html.ActionLink("Loan Info", "Index", "LoanInfo")</li>*@
+                            }
+                            else if ((int)Session["UserRole"] == 2)
+                            {
+                               @* <li>@Html.ActionLink("Credit Union", "Index", "CreditUnion")</li>
+                                  <li>@Html.ActionLink("Customer", "Index", "Customer")</li>
+                                  <li>@Html.ActionLink("Loan Info", "Index", "LoanInfo")</li>*@
+                            }
+
+                            @*<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>*@
+                            <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+                        </ul>
+                    //}
+                }
+                else
+                {
+                    @*@Html.AntiForgeryToken()*@
+                    <ul class="right hide-on-med-and-down">
+                        <!-- InstanceBeginEditable name="FullNav" -->
+                        <li><a href="contact.html">Contact</a></li>
+                        <!-- InstanceEndEditable -->
+                        @*<li class="active"><a href="Home/index.html"><strong>Log in</strong></a></li>*@
+                    </ul>
+                    <ul id="nav-mobile" class="side-nav">
+                        <!-- InstanceBeginEditable name="MobileNav" -->
+                        <li><a href="contact.html">Contact</a></li>
+                        <!-- InstanceEndEditable -->
+                        @*<li class="active"><a href="index.html">Log in</a></li>*@
+                    </ul>
+                }
+
+
+                <a href="#" data-activates="nav-mobile" class="button-collapse"><em class="material-icons">menu</em></a>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+        <footer class="page-footer grey darken-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l6">
+                        <img src="~/img/cu-pre-approvals.png" max-width="200" height="78">
+                        <p class="grey-text text-lighten-4">Connecting credit union pre-approvals to auto dealers.</p>
+                    </div>
+                    <div class="col s12 l6">
+                        <h5 class="white-text">Credit Unions</h5>
+                        <ul>
+                            <li><a class="blue-grey-text text-lighten-2" href="http://www.bmtccu.com/">Beaumont Community Credit Union</a></li>
+                            <li><a class="blue-grey-text text-lighten-2" href="https://www.dugood.org/">DuGood Federal Credit Union</a></li>
+                            <li><a class="blue-grey-text text-lighten-2" href="https://www.wellspringcu.com/">Wellspring Credit Union</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 m6 push-m6 right-align">
+                            <!--<a class="blue-grey-text text-lighten-1" href="#">Auto Dealer Partners</a>-->
+                        </div>
+                        <div class="col s12 m6 pull-m6">
+                            Copyright © 2017 <a class="blue-grey-text text-lighten-2">Texas Credit Union Services</a>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+   
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

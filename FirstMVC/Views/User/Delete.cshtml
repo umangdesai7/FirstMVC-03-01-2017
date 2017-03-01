@@ -1,0 +1,73 @@
+﻿@model FirstMVC.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <div class="row">
+        <div class="col s12">
+            <div class="card hoverable">
+                <div class="card-content">
+                    <span class="card-title indigo-text">User Information</span>
+                    @if ((int)ViewBag.usertype != 0)
+                    {
+                        <div class="row">
+                            @if ((int)ViewBag.usertype == 1)
+                            {
+                                <div class="input-field col s12 m6">
+                                    @Html.TextBoxFor(model => model.CUName, new Dictionary<string, object>() { { "readonly", "true" } })
+                                    <label>Credit Union</label>
+                                </div>
+                            }
+                            @if ((int)ViewBag.usertype == 2)
+                            {
+                                <div class="input-field col s12 m6">
+                                    @Html.TextBoxFor(model => model.DealerName, new Dictionary<string, object>() { { "readonly", "true" } })
+                                    <label>Dealer</label>
+                                </div>
+                            }
+                        </div>
+                    }
+                    <div class="row">
+                        <div class="input-field col s12">
+                            @Html.TextBoxFor(model => model.UserName, new Dictionary<string, object>() { { "readonly", "true" } })
+                            <label for="UserName">Email (username)</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            @Html.TextBoxFor(model => model.FirstName, new Dictionary<string, object>() { { "readonly", "true" } })
+                            <label for="FirstName">First Name</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            @Html.TextBoxFor(model => model.LastName, new Dictionary<string, object>() { { "readonly", "true" } })
+                            <label for="LastName">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            @Html.TextBoxFor(model => model.Phone, new Dictionary<string, object>() { { "readonly", "true" } })
+                            <label for="Phone">Phone Number</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

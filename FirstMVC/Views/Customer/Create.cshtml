@@ -1,0 +1,251 @@
+﻿@model FirstMVC.Models.Customer
+
+@{
+    ViewBag.Title = "Create";
+}
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="row">
+        <div class="col s12">
+            <div id="member" class="card">
+                <div class="card-content">
+                    <span class="card-title indigo-text">Borrower Information</span>
+                    <div class="row">
+                            <div class="input-field col s12 m4">
+                                @Html.EditorFor(model => model.CustomerName)
+                                <label class="active">Customer Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m4">
+                                @Html.EditorFor(model => model.CCSocialNum)
+                                <label class="active">Last 4 of SSN</label>
+                            </div>
+                            <div class="input-field col s12 m4">
+                                @Html.EditorFor(model => model.DrivingLic)
+                                <label class="active">DL</label>
+                            </div>
+                            <div class="input-field col s12 m4">
+                                @Html.EditorFor(model => model.DOB)
+                                <label class="active">DOB</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.FirstName)
+                                <label class="active">First Name</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.LastName)
+                                <label class="active">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                @Html.EditorFor(model => model.Address)
+                                <label class="active">Address</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.Phone)
+                                <label class="active">Phone</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.Email)
+                                <label class="active">Email</label>
+                            </div>
+                        </div>
+                        <span class="card-title indigo-text">Co-borrower</span>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.CoBorrowerName)
+                                <label class="active">Name</label>
+                            </div>
+                            @*<div class="input-field col s12 m6">
+                                    @Html.EditorFor(model => model.CCSocialNum)
+                                    <label class="active" for="co_LasttName">Last Name</label>
+                                </div>*@
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="loan" class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title indigo-text">Pre-approval Details</span>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.TextBox("preapprovalid",(string)ViewBag.preapprovalid, new Dictionary<string, object>() { { "readonly", "true" } })
+                                @*<input value="201701001" id="preapp_id" type="text" class="readonly">*@
+                                <label class="active">Pre-approval ID</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.ApprovalAmt)
+                                <label class="active">Amount</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.Rate)
+                                <label class="active">Rate (APR)</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.Term)
+                                <label class="active">Term (months)</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.LTV)
+                                <label class="active">Maximum LTV</label>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col s12">
+            <div id="vehicle" class="card">
+                <div class="card-content">
+                    <span class="card-title indigo-text">Trade-in Information</span>
+                        <div class="row">
+                            @if ((int)ViewBag.usertype == 0)
+                            {
+                                <div class="input-field col s12">
+                                    <label class="active">Lien Holder</label>
+                                    @Html.DropDownListFor(model => model.CUId, ViewBag.CU as SelectList, "Select Credit Union", new {htmlAttributes = new {@class = "select-dropdown"}})
+                                </div>
+                            }
+                            else
+                            {
+                                 <div class="input-field col s12">
+                                    @Html.TextBox("CUName",(string)ViewBag.CUName , new Dictionary<string, object>() { { "readonly", "true" } })
+                                    <label class="active">Lien Holder</label>
+                                </div>
+                            }
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m4">
+                                @Html.EditorFor(model => model.VinNum)
+                                <label class="active">VIN</label>
+                            </div>
+                            <div class="input-field col s12 m4">
+                                @Html.EditorFor(model => model.Mileage)
+                                <label class="active">Mileage</label>
+                            </div>
+                            <div class="input-field col s12 m4">
+                                @Html.EditorFor(model => model.Year)
+                                <label class="active">Year</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.Make)
+                                <label class="active">Make</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.Model)
+                                <label class="active">Model</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.PayOff)
+                                <label class="active">Payoff</label>
+                            </div>
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.PreApprovExpirationDate)
+                                <label class="active">Pre-Approval Expiration</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.PerDiem)
+                                <label class="active">Per Diem</label>
+
+                            </div>
+                            
+                            <div class="input-field col s12 m6">
+                                @Html.EditorFor(model => model.PayOffExpirationDate)
+                                <label class="active">Payoff Expiration</label>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    if ((int)ViewBag.usertype > 0 )
+     {    
+        <div class="row">
+              <!-- Visible to Dealer, Admin only -->
+              <div class="col s12">
+                  <div id="cu" class="card">
+                      <div class="card-content">
+                          <span class="card-title indigo-text">Credit Union Information</span>
+                          <div class="row">
+                              <div class="input-field col s12">
+                                  @Html.TextBox("CUName1",(string)ViewBag.CUName, new Dictionary<string, object>() { { "readonly", "true" } })
+                                  <label class="active">Credit Union Name</label>
+                              </div>
+                              <div class="input-field col s12">
+                                  @Html.TextBox("address",(string)ViewBag.address, new Dictionary<string, object>() { { "readonly", "true" } })
+                                  <label class="active">Address</label>
+                              </div>
+                              <div class="input-field col m6 s6">
+                                  @Html.TextBox("phone",(string)ViewBag.phone, new Dictionary<string, object>() { { "readonly", "true" } })
+                                  <label class="active">Phone Number</label>
+                              </div>
+                              <div class="input-field col m6 s6">
+                                  @Html.TextBox("fax",(string)ViewBag.fax, new Dictionary<string, object>() { { "readonly", "true" } })
+                                  <label class="active">FAX Number</label>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- END Visible to Dealer, Admin only -->
+          </div>
+    }
+
+
+    
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/inputmask")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Phone").inputmask("(999) 999-9999");
+            $("#Fax").inputmask("(999) 999-9999");
+            $("#CCSocialNum").inputmask("9999");
+            
+        });
+    </script>
+}

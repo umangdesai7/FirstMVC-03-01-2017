@@ -1,0 +1,136 @@
+﻿@*@model IEnumerable<FirstMVC.Models.VehicleInfo>*@
+
+@model PagedList.IPagedList<FirstMVC.Models.VehicleInfo>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.NameSortParm = "CustomerName";
+}
+
+<h1 class="center indigo-text">Customer Vehicles</h1>
+
+@if ((int)Session["UserRole"] == 1)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
+@using (Html.BeginForm("Index", "VehicleInfo", FormMethod.Get))
+{
+    <p>
+        <div class="row">
+            <div class="input-field col s12">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { size = "100" })
+                @Html.Label("Search by Customer Name")
+            </div>
+        </div>
+        <input type="submit" value="Search" style="position: absolute; left: -9999px" />
+    </p>
+}
+
+<table class="responsive-table striped">
+    <thead>
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.CUId)
+                </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.CUName)*@
+                Credit Union
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.CustomerId)
+                </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.CustomerName)*@
+                Customer
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Year)*@
+                Year
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Make)*@
+                Make
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Model)*@
+                Model
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.VinNum)*@
+                Vin NUmber
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Mileage)*@
+                Mileage
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.PayOff)*@
+                PayOff
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.PerDiem)*@
+                PerDiem
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.PayOffExpirationDate)*@
+                PayOffExpirationDate
+            </th>
+            <th></th>
+        </tr>
+    <thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CUId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.CUName)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CustomerId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VinNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mileage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayOff)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PerDiem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayOffExpirationDate)
+                </td>
+                <td class="center"><a class="waves-effect waves-teal btn-flat" href="@Url.Action("Details", new { id = item.id })"><i class="large material-icons">remove_red_eye</i></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+<div class="center indigo-text">
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

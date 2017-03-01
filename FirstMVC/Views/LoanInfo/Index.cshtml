@@ -1,0 +1,122 @@
+﻿@*@model IEnumerable<FirstMVC.Models.LoanInfo>*@
+@model PagedList.IPagedList<FirstMVC.Models.LoanInfo>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    ViewBag.NameSortParm = "CustomerName";
+}
+
+<h1 class="center indigo-text">Loan Informations</h1>
+
+@if ((int)Session["UserRole"] == 1)
+{
+    <p>
+        @*@Html.ActionLink("Create New", "Create*@")
+        <a class="waves-effect waves-light green btn" href="@Url.Action("Create")"><i class="material-icons left">add</i>Add Loan Information</a>
+    </p>
+}
+
+@using (Html.BeginForm("Index", "LoanInfo", FormMethod.Get))
+{
+    <p>
+        <div class="row">
+            <div class="input-field col s12">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { size = "100" })
+                @Html.Label("Search by Customer Name")
+            </div>
+        </div>
+        <input type="submit" value="Search" style="position: absolute; left: -9999px" />
+    </p>
+}
+
+<table class="responsive-table striped">
+    <thead>
+    <tr>
+        @*<th>
+                   @Html.DisplayNameFor(model => model.CUId)
+                </th>*@
+        <th>
+            @*@Html.DisplayNameFor(model => model.CUName)*@
+            Credit Union
+        </th>
+        @*<th>
+                    @Html.DisplayNameFor(model => model.CustomerId)
+                </th>*@
+        <th>
+            @*@Html.DisplayNameFor(model => model.CustomerName)*@
+            Customer
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.LTV)*@
+            Loan To Value
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Rate)*@
+            Rate
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Term)*@
+            Term
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.ApprovalAmt)*@
+            Approval Amount
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.PreApprovExpirationDate)*@
+            Pre Approval Expiration Date
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.LoanDoc)*@
+            Loan Documents
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CUId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.CUName)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CustomerId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LTV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Term)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApprovalAmt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PreApprovExpirationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoanDoc)
+                </td>
+                @*<td>
+                    @Html.ActionLink("View", "Details", new { id = item.id })
+                </td>*@
+                <td class="center"><a class="waves-effect waves-teal btn-flat" href="@Url.Action("Details", new { id = item.id })"><i class="large material-icons">remove_red_eye</i></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="center indigo-text">
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

@@ -1,0 +1,291 @@
+﻿@using FirstMVC.Models
+@model FirstMVC.Models.Customer
+
+@{
+    ViewBag.Title = "CustomerSearch";
+}
+
+<h2>CustomerSearch</h2>
+
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Customer</h4>
+            @if ((int)Session["UserRole"] == 1 || (int)Session["UserRole"] == 0)
+            {
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+                    @*@Html.ActionLink("Delete", "Delete", new { id = Model.id }) |
+                    @Html.ActionLink("Back to List", "Index")*@
+                </p>
+            }
+
+            <hr />
+            <dl class="dl-horizontal">
+                @*<dt>
+                @Html.DisplayNameFor(model => model.CUId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CUId)
+            </dd>*@
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CUName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CUName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CustomerName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CustomerName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CoBorrowerName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CoBorrowerName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CCSocialNum)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CCSocialNum)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DrivingLic)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DrivingLic)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DOB)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DOB)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Phone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+            </dl>
+
+        </div>
+        <div class="col-md-4">
+            <h4>Vehicle Information</h4>
+            @if ((int)Session["UserRole"] == 1)
+            {
+                <p>
+                    @Html.ActionLink("Edit", "Edit", "VehicleInfo",new { id = (int)ViewBag.vehicleId }) |
+                    @*@Html.ActionLink("Delete", "Delete", new { id = Model.id }) |
+                    @Html.ActionLink("Back to List", "Index")*@
+                </p>
+            }
+            <hr />
+            
+                @if ((string) ViewBag.VehicleStatus == "")
+                {
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Year
+                        </dt>
+
+                        <dd>
+                            @Html.Label(ViewBag.Year as string )
+                        </dd>
+
+                        <dt>
+                            Make
+                        </dt>
+
+                        <dd>
+                            @Html.Label(ViewBag.Make as string)
+                        </dd>
+
+                        <dt>
+                            Model
+                        </dt>
+
+                        <dd>
+                            @Html.Label(ViewBag.Model as string)
+                        </dd>
+
+                        <dt>
+                            VinNum
+                        </dt>
+
+                        <dd>
+                            @Html.Label(ViewBag.VinNum as string)
+                        </dd>
+
+                        <dt>
+                            Mileage
+                        </dt>
+
+                        <dd>
+                            @Html.Label(ViewBag.Mileage as string)
+                        </dd>
+
+                        <dt>
+                            PayOff
+                        </dt>
+
+                        <dd>
+                            @Html.Label(ViewBag.PayOff as string)
+                        </dd>
+
+                        <dt>
+                            PerDiem
+                        </dt>
+
+                        <dd>
+                            @Html.Label(ViewBag.PerDiem as string)
+                        </dd>
+
+                        <dt>
+                            PayOffExpirationDate
+                        </dt>
+
+                        <dd>
+                            @Html.Label(ViewBag.PayOffExpirationDate as string)
+                        </dd>
+                    </dl>
+
+                }
+                else
+                {
+                    <h1 forcolor="red">
+                        @Html.Label(ViewBag.VehicleStatus as string)
+                    </h1>
+                }
+                    
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Loan Detail</h4>
+            @if ((int)Session["UserRole"] == 1 || (int)Session["UserRole"] == 0)
+            {
+                <p>
+                    @Html.ActionLink("Edit", "Edit", "LoanInfo",  new { id = (int)ViewBag.LoanId }) |
+                    @*@Html.ActionLink("Delete", "Delete", new { id = Model.id }) |
+                    @Html.ActionLink("Back to List", "Index")*@
+                </p>
+            }
+
+            <hr />
+            <dl class="dl-horizontal">
+                @if ((string)ViewBag.LoanStatus == "")
+                {
+                   <dt>
+                        LTV
+                    </dt>
+
+                    <dd>
+                        @Html.Label(ViewBag.LTV as string)
+                    </dd>
+
+                    <dt>
+                        Rate
+                    </dt>
+
+                    <dd>
+                        @Html.Label(ViewBag.Rate as string)
+                    </dd>
+
+                    <dt>
+                        Term
+                    </dt>
+
+                    <dd>
+                        @Html.Label(ViewBag.Term as string)
+                    </dd>
+
+                    <dt>
+                        Approval Amount
+                    </dt>
+
+                    <dd>
+                        @Html.Label(ViewBag.ApprovalAmt as string)
+                    </dd>
+
+                    <dt>
+                        Pre Approv Expiration Date
+                    </dt>
+
+                    <dd>
+                        @Html.Label(ViewBag.PreApprovExpirationDate as string)
+                    </dd>
+
+                    <dt>
+                        Loan Doc
+                    </dt>
+
+                    <dd>
+                        @Html.Label(ViewBag.LoanDoc as string)
+                    </dd>
+                }
+                else
+                {
+                    <h1 forcolor="red">
+                        @Html.Label(ViewBag.LoanStatus as string)
+                    </h1>
+
+                }
+            </dl>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to Search",  "Index" , "Home")
+</p>

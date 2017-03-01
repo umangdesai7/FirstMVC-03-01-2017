@@ -1,0 +1,125 @@
+﻿@model FirstMVC.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CUId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CUName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoBorrowerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoBorrowerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CCSocialNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CCSocialNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DrivingLic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DrivingLic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+</div>
+
+@if ((int) Session["UserRole"] == 1 || (int)Session["UserRole"] == 0)
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new {id = Model.id}) |
+        @Html.ActionLink("Delete", "Delete", new {id = Model.id}) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

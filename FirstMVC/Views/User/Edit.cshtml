@@ -1,0 +1,146 @@
+﻿@model FirstMVC.Models.User
+
+@{
+    ViewBag.Title = "Edit";
+    int usertype = (int) ViewBag.usertype;
+}
+
+<h2>Edit</h2>
+
+@*<script type="text/javascript">
+    function ShowHideDiv1(chkPassport) {
+        var DealerDiv = document.getElementById("DealerDiv");
+        DealerDiv.style.display = chkPassport.checked ? "block" : "none";
+        var CUDiv = document.getElementById("CUDiv");
+        CUDiv.style.display = chkPassport.checked ? "none" : "block";
+        var CUCheck = document.getElementById("CUCheck");
+        CUCheck.checked = !chkPassport.checked;
+        @{ ViewBag.usertype = "2"; }
+    }
+
+    function ShowHideDiv(chkPassport) {
+        var CUDiv = document.getElementById("CUDiv");
+        CUDiv.style.display = chkPassport.checked ? "block" : "none";
+        var DealerDiv = document.getElementById("DealerDiv");
+        DealerDiv.style.display = chkPassport.checked ? "none" : "block";
+        var DealerCheck = document.getElementById("DealerCheck");
+        DealerCheck.checked = !chkPassport.checked;
+        @{ ViewBag.usertype = "1"; }
+    }
+
+    function HideDiv() {
+        var CUDiv = document.getElementById("CUDiv");
+        CUDiv.style.display = "none";
+        var DealerDiv = document.getElementById("DealerDiv");
+        DealerDiv.style.display = "none";
+        @{ ViewBag.usertype = "0"; }
+    }
+
+</script>*@
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <br><br>
+ 		<!-- InstanceBeginEditable name="Body" -->
+    <h1 class="center indigo-text">Edit User</h1>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.CUId)
+    @Html.HiddenFor(model => model.DelId)
+    <br>
+    if (usertype != 0)
+    {
+        <div class="row">
+            @if (usertype == 1)
+            {
+                <div class="input-field col s12 m6">
+                    @Html.TextBoxFor(model => model.CUName, new Dictionary<string, object>() { { "readonly", "true" } })
+                    <label>Credit Union</label>
+                </div>
+            }
+            @if (usertype == 2)
+            {
+                <div class="input-field col s12 m6">
+                    @Html.TextBoxFor(model => model.DealerName, new Dictionary<string, object>() { { "readonly", "true" } })
+                    <label>Dealer</label>
+                </div>
+            }
+        </div>
+    }
+    <div class="row">
+        <div class="col s12">
+            <div class="card hoverable">
+                <div class="card-content">
+                    <span class="card-title indigo-text">User Information</span>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            @Html.TextBoxFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                            <label for="UserName">Email (username)</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            @Html.TextBoxFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            <label for="FirstName">First Name</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            @Html.TextBoxFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            <label for="LastName">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            @Html.TextBoxFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            <label for="Phone">Phone Number</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            <label for="Password">Password</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            @*<input id="user_password-conf" type="password">*@
+                            <label for="ConfirmPassword">Confirm Password</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/inputmask")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Phone").inputmask("(999) 999-9999");
+            $("#Fax").inputmask("(999) 999-9999");
+        });
+    </script>
+}
+
+

@@ -1,0 +1,126 @@
+﻿@model FirstMVC.Models.VehicleInfo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VehicleInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CUId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CUName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUName)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Make)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Make)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VinNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VinNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mileage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mileage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayOff)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayOff)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PerDiem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerDiem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayOffExpirationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayOffExpirationDate)
+        </dd>
+
+    </dl>
+</div>
+
+@if ((int)Session["UserRole"] == 1)
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+

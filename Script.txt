@@ -1,0 +1,399 @@
+USE [master]
+GO
+/****** Object:  Database [cusoweb]    Script Date: 2/9/2017 1:15:25 PM ******/
+CREATE DATABASE [cusoweb]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'cusoweb', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\DATA\cusoweb.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'cusoweb_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\DATA\cusoweb_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [cusoweb] SET COMPATIBILITY_LEVEL = 120
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [cusoweb].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [cusoweb] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [cusoweb] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [cusoweb] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [cusoweb] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [cusoweb] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [cusoweb] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [cusoweb] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [cusoweb] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [cusoweb] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [cusoweb] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [cusoweb] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [cusoweb] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [cusoweb] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [cusoweb] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [cusoweb] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [cusoweb] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [cusoweb] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [cusoweb] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [cusoweb] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [cusoweb] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [cusoweb] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [cusoweb] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [cusoweb] SET RECOVERY FULL 
+GO
+ALTER DATABASE [cusoweb] SET  MULTI_USER 
+GO
+ALTER DATABASE [cusoweb] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [cusoweb] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [cusoweb] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [cusoweb] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+ALTER DATABASE [cusoweb] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'cusoweb', N'ON'
+GO
+USE [cusoweb]
+GO
+/****** Object:  Table [dbo].[CreditUnion]    Script Date: 2/9/2017 1:15:25 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[CreditUnion](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[CUName] [varchar](20) NOT NULL,
+	[Address] [varchar](250) NULL,
+	[Phone] [varchar](20) NULL,
+	[Fax] [varchar](20) NULL,
+	[Email] [varchar](50) NULL,
+	[Active] [int] NULL,
+	[LastModified] [datetime] NULL DEFAULT (getdate()),
+	[ModifiedBy] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[CUName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Customer]    Script Date: 2/9/2017 1:15:25 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Customer](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[CUId] [int] NULL,
+	[CustomerName] [varchar](50) NOT NULL,
+	[CoBorrowerName] [varchar](50) NULL,
+	[FirstName] [varchar](50) NULL,
+	[LastName] [varchar](50) NULL,
+	[CCSocialNum] [numeric](18, 0) NULL,
+	[DrivingLic] [varchar](20) NULL,
+	[DOB] [datetime] NULL,
+	[Address] [varchar](250) NULL,
+	[Phone] [varchar](20) NULL,
+	[Email] [varchar](50) NULL,
+	[Active] [int] NULL,
+	[LastModified] [datetime] NULL DEFAULT (getdate()),
+	[ModifiedBy] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[DrivingLic] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Dealer]    Script Date: 2/9/2017 1:15:25 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Dealer](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[CUId] [int] NULL,
+	[DealerName] [varchar](50) NOT NULL,
+	[DealerInfo] [varchar](250) NULL,
+	[Address] [varchar](250) NULL,
+	[Phone] [varchar](20) NULL,
+	[Fax] [varchar](20) NULL,
+	[Email] [varchar](50) NULL,
+	[Active] [int] NULL,
+	[LastModified] [datetime] NULL DEFAULT (getdate()),
+	[ModifiedBy] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[DealerName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[employee]    Script Date: 2/9/2017 1:15:25 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[employee](
+	[employeeunkid] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](255) NULL,
+	[address] [nvarchar](255) NULL,
+	[phone] [nvarchar](50) NULL,
+	[email] [nvarchar](50) NULL,
+ CONSTRAINT [PK_employee] PRIMARY KEY CLUSTERED 
+(
+	[employeeunkid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[LoanInfo]    Script Date: 2/9/2017 1:15:25 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[LoanInfo](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[CUId] [int] NULL,
+	[CustomerId] [int] NULL,
+	[LTV] [int] NULL,
+	[Rate] [decimal](12, 3) NULL,
+	[Term] [varchar](250) NULL,
+	[ApprovalAmt] [int] NULL,
+	[PreApprovExpirationDate] [datetime] NULL,
+	[LoanDoc] [varchar](250) NULL,
+	[Active] [int] NULL,
+	[LastModified] [datetime] NULL,
+	[ModifiedBy] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Role]    Script Date: 2/9/2017 1:15:25 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Role](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleName] [varchar](50) NOT NULL,
+	[RoleDesc] [varchar](250) NULL,
+	[Active] [int] NULL,
+	[LastModified] [datetime] NULL,
+	[ModifiedBy] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[RoleName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[User]    Script Date: 2/9/2017 1:15:25 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[User](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[CUId] [int] NULL,
+	[DelId] [int] NULL,
+	[UserName] [varchar](20) NOT NULL,
+	[Password] [varchar](20) NOT NULL,
+	[FirstName] [varchar](20) NULL,
+	[LastName] [varchar](20) NULL,
+	[Gender] [varchar](10) NULL,
+	[Phone] [varchar](20) NULL,
+	[Email] [varchar](50) NULL,
+	[Active] [int] NULL,
+	[LastModified] [datetime] NULL,
+	[ModifiedBy] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[Password] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[UserName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[UserRole]    Script Date: 2/9/2017 1:15:25 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserRole](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NULL,
+	[RoleId] [int] NULL,
+	[Active] [int] NULL,
+	[LastModified] [datetime] NULL,
+	[ModifiedBy] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[VehicleInfo]    Script Date: 2/9/2017 1:15:25 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[VehicleInfo](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[CUId] [int] NULL,
+	[CustomerId] [int] NULL,
+	[Year] [int] NULL,
+	[Make] [varchar](50) NULL,
+	[Model] [varchar](20) NULL,
+	[VinNum] [varchar](20) NULL,
+	[Mileage] [int] NULL,
+	[Payoff] [varchar](250) NULL,
+	[PerDiem] [varchar](20) NULL,
+	[PayOffExpirationDate] [datetime] NULL,
+	[Active] [int] NULL,
+	[LastModified] [datetime] NULL,
+	[ModifiedBy] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[PerDiem] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[VinNum] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[Model] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[LoanInfo] ADD  DEFAULT (getdate()) FOR [LastModified]
+GO
+ALTER TABLE [dbo].[Role] ADD  DEFAULT (getdate()) FOR [LastModified]
+GO
+ALTER TABLE [dbo].[User] ADD  DEFAULT (getdate()) FOR [LastModified]
+GO
+ALTER TABLE [dbo].[UserRole] ADD  DEFAULT (getdate()) FOR [LastModified]
+GO
+ALTER TABLE [dbo].[VehicleInfo] ADD  DEFAULT (getdate()) FOR [LastModified]
+GO
+ALTER TABLE [dbo].[Customer]  WITH CHECK ADD FOREIGN KEY([CUId])
+REFERENCES [dbo].[CreditUnion] ([id])
+GO
+ALTER TABLE [dbo].[Dealer]  WITH CHECK ADD FOREIGN KEY([CUId])
+REFERENCES [dbo].[CreditUnion] ([id])
+GO
+ALTER TABLE [dbo].[LoanInfo]  WITH CHECK ADD FOREIGN KEY([CustomerId])
+REFERENCES [dbo].[Customer] ([id])
+GO
+ALTER TABLE [dbo].[LoanInfo]  WITH CHECK ADD FOREIGN KEY([CUId])
+REFERENCES [dbo].[CreditUnion] ([id])
+GO
+ALTER TABLE [dbo].[User]  WITH CHECK ADD FOREIGN KEY([CUId])
+REFERENCES [dbo].[CreditUnion] ([id])
+GO
+ALTER TABLE [dbo].[User]  WITH CHECK ADD FOREIGN KEY([DelId])
+REFERENCES [dbo].[Dealer] ([id])
+GO
+ALTER TABLE [dbo].[UserRole]  WITH CHECK ADD FOREIGN KEY([RoleId])
+REFERENCES [dbo].[Role] ([id])
+GO
+ALTER TABLE [dbo].[UserRole]  WITH CHECK ADD FOREIGN KEY([UserId])
+REFERENCES [dbo].[User] ([id])
+GO
+ALTER TABLE [dbo].[VehicleInfo]  WITH CHECK ADD FOREIGN KEY([CustomerId])
+REFERENCES [dbo].[Customer] ([id])
+GO
+ALTER TABLE [dbo].[VehicleInfo]  WITH CHECK ADD FOREIGN KEY([CUId])
+REFERENCES [dbo].[CreditUnion] ([id])
+GO
+ALTER TABLE [dbo].[Customer]  WITH CHECK ADD  CONSTRAINT [CK_CCvalidity] CHECK  ((len([CCSocialNum])=(4)))
+GO
+ALTER TABLE [dbo].[Customer] CHECK CONSTRAINT [CK_CCvalidity]
+GO
+USE [master]
+GO
+ALTER DATABASE [cusoweb] SET  READ_WRITE 
+GO

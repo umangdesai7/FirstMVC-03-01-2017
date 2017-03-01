@@ -1,0 +1,108 @@
+﻿@model FirstMVC.Models.LoanInfo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LoanInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CUId)
+        </dt>*@
+
+        @*<dd>
+            @Html.DisplayFor(model => model.CUId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CUName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CUName)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LTV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LTV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Term)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Term)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApprovalAmt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApprovalAmt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PreApprovExpirationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PreApprovExpirationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoanDoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoanDoc)
+        </dd>
+
+    </dl>
+</div>
+@if ((int)Session["UserRole"] == 1 || (int)Session["UserRole"] == 0)
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
